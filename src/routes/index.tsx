@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import IsLoginWrapper from '@/components/wrapper/is-login-wrapper';
 import NotLoginWrapper from '@/components/wrapper/not-login-wrapper';
 import Login from '@/pages/login';
+import Header from '@/components/wrapper/header';
+import PembagianOtomatis from '@/pages/pembagian-otomatis';
 
 const routes = createBrowserRouter([
   {
@@ -11,7 +13,17 @@ const routes = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Dashboard />,
+        element: <Header />,
+        children: [
+          {
+            path: '/',
+            element: <Dashboard />,
+          },
+          {
+            path: '/pembagian-otomatis',
+            element: <PembagianOtomatis />,
+          },
+        ],
       },
     ],
   },

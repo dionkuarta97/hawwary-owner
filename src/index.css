@@ -1,4 +1,8 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
 @config "../tailwind.config.js";
+
+body {
+  background-color: #f5f5f5;
+}

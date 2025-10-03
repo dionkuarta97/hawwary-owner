@@ -1,4 +1,5 @@
 
+import { toast } from '@/components/default-toast';
 import type { IErrorResponse } from '@/interface/response/error';
 import authStore from '@/store/auth';
 import axios, { AxiosError } from 'axios';
@@ -65,8 +66,10 @@ axiosInstance.interceptors.response.use(
           localStorage.removeItem('token');
           localStorage.removeItem('user');
           
-          // Reload halaman untuk redirect ke login
-          window.location.reload();
+      
+          const message = Array.isArray(error.response.data.message) ? error.response.data.message.join(', ') : error.response.data.message || 'Session expired';
+         toast.error('Gagal!', message);
+       
         }
       } else if (error.request) {
         // Request dibuat tapi tidak ada response
