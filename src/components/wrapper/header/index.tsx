@@ -9,7 +9,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <div className="w-full h-[70px] flex py-4 border-b border-gray-200 shadow-sm bg-white sticky top-0 z-50">
+      <div className="w-full  items-center h-[70px] flex py-4 border-b border-gray-200 shadow-sm bg-white sticky top-0 z-50">
         <Container noContainer className="h-fit !mx-0 w-full min-h-[0px]">
           <div className="w-full flex justify-between items-center">
             <div className="flex items-center gap-2">
