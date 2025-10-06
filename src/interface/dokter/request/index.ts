@@ -3,3 +3,7 @@ export interface IDokterRequestParams {
   page?: number;
   search?: string;
 }
+
+export interface ICreateDokterRequest {
+  name: string;
+}
