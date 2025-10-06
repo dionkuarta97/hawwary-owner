@@ -9,7 +9,14 @@ import type { ISuccessResponse } from '@/interface/response/success';
 
 export const getPembagianOtomatis = async (
   params: IPembagianOtomatisRequestParams
-): Promise<ISuccessPaginationResponse<IPembagianOtomatisResponse>> => {
+): Promise<
+  ISuccessPaginationResponse<
+    IPembagianOtomatisResponse,
+    {
+      total_percentage: number;
+    }
+  >
+> => {
   const response = await axiosInstance.get('/owner/addtional-fees/get', {
     params,
   });

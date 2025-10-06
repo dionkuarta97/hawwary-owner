@@ -30,7 +30,7 @@ const useSidebarController = () => {
       {
         label: 'Kelola Dokter',
         value: EMenu.KELOLA_DOKTER,
-        path: '/dokter',
+        path: '/kelola-dokter',
         icon: <ProfileCircle />,
       },
     ],

@@ -25,7 +25,7 @@ const routes = createBrowserRouter([
             element: <PembagianOtomatis />,
           },
           {
-            path: '/dokter',
+            path: '/kelola-dokter',
             element: <DokterPage />,
           },
         ],

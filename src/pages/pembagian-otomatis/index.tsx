@@ -7,6 +7,7 @@ import { Button } from '@material-tailwind/react';
 import { Plus } from 'iconoir-react';
 import FormModal from './components/form-modal';
 import ModalConfirmation from '@/components/modal-confirmation';
+import StatisticWithValue from '@/components/statistic-with-value';
 
 const PembagianOtomatis = () => {
   const {
@@ -56,6 +57,10 @@ const PembagianOtomatis = () => {
         <Plus className="mr-1 h-4 w-4 stroke-2" />
         Tambah Pembagian Otomatis
       </Button>
+      <StatisticWithValue
+        title="Total Persentase"
+        value={`${data?.metadata?.statistics?.total_percentage ?? 0}%`}
+      />
       <DefaultTable<IPembagianOtomatisResponse>
         data={Array.isArray(data?.metadata?.data) ? data.metadata.data : []}
         columns={columns}

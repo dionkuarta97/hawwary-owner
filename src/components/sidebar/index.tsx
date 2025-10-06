@@ -39,14 +39,13 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
           <List className="flex-1">
             {menuItems.map(item => (
               <List.Item
+                selected={isActive(item.value)}
                 key={item.value}
                 onClick={() => {
                   navigate(item.path);
                   onClose(); // Tutup sidebar setelah navigasi di mobile
                 }}
-                className={`cursor-pointer ${
-                  isActive(item.value) ? 'bg-surface text-primary' : ''
-                }`}
+                className={`cursor-pointer `}
               >
                 <List.ItemStart>{item.icon}</List.ItemStart>
                 {item.label}

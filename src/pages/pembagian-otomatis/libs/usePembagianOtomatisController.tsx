@@ -14,6 +14,7 @@ const usePembagianOtomatisController = () => {
     search: '',
   });
   const { data, isLoading, error } = useQueryPembagianOtomatis(params);
+
   const { isOpen: modalAdd, setIsOpen: setModalAdd } = useOpenCloseModal();
   const { isOpen: modalDelete, setIsOpen: setModalDelete } = useOpenCloseModal();
   const { deletePembagianOtomatis } = useDeletePembagianOtomatis();

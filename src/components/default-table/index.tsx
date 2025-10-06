@@ -26,6 +26,7 @@ interface IDefaultTableProps<T> {
   search?: string;
   onSearchChange?: (newSearch: string) => void;
   isLoading?: boolean;
+  defaultShowDataMobile?: number;
 }
 const DefaultTable = <T,>({
   data,
@@ -39,12 +40,13 @@ const DefaultTable = <T,>({
   search,
   onSearchChange,
   isLoading = false,
+  defaultShowDataMobile = 2,
 }: IDefaultTableProps<T>) => {
   const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
   const [isMobile, setIsMobile] = useState(false);
 
   const visibleColumns = (index: number) =>
-    expandedCards.has(index) ? columns : columns.slice(0, 2);
+    expandedCards.has(index) ? columns : columns.slice(0, defaultShowDataMobile);
 
   // Detect mobile screen size
   useEffect(() => {
@@ -189,7 +191,7 @@ const DefaultTable = <T,>({
                 {/* Card Header with Number */}
                 <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-100">
                   <div className="w-6 h-6 bg-gray-200 rounded-full animate-pulse"></div>
-                  {columns.length > 2 && (
+                  {columns.length > defaultShowDataMobile && (
                     <div className="w-3 h-3 bg-gray-200 rounded animate-pulse"></div>
                   )}
                 </div>
@@ -197,7 +199,7 @@ const DefaultTable = <T,>({
                 <div className="space-y-2">
                   {columns
                     .filter(column => column.key !== 'action')
-                    .slice(0, 2)
+                    .slice(0, defaultShowDataMobile)
                     .map(column => (
                       <div key={String(column.key)} className="flex justify-between items-start">
                         <div className="h-4 bg-gray-200 rounded animate-pulse w-16"></div>
@@ -229,7 +231,7 @@ const DefaultTable = <T,>({
                       {index + 1 + (page - 1) * per_page}
                     </div>
                   </div>
-                  {columns.length > 2 && (
+                  {columns.length > defaultShowDataMobile && (
                     <div className="text-xs text-gray-500">
                       {expandedCards.has(index) ? (
                         <NavArrowUp className="h-3 w-3" />
