@@ -5,6 +5,7 @@ import NotLoginWrapper from '@/components/wrapper/not-login-wrapper';
 import Login from '@/pages/login';
 import Header from '@/components/wrapper/header';
 import PembagianOtomatis from '@/pages/pembagian-otomatis';
+import DokterPage from '@/pages/dokter';
 
 const routes = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const routes = createBrowserRouter([
           {
             path: '/pembagian-otomatis',
             element: <PembagianOtomatis />,
+          },
+          {
+            path: '/dokter',
+            element: <DokterPage />,
           },
         ],
       },

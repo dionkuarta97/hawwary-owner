@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { StatsUpSquare, Wallet } from 'iconoir-react';
+import { ProfileCircle, StatsUpSquare, Wallet } from 'iconoir-react';
 import { EMenu } from '@/utils/enums';
 
 const useSidebarController = () => {
@@ -26,6 +26,12 @@ const useSidebarController = () => {
         value: EMenu.PEMBAGIAN_OTOMATIS,
         path: '/pembagian-otomatis',
         icon: <Wallet />,
+      },
+      {
+        label: 'Kelola Dokter',
+        value: EMenu.KELOLA_DOKTER,
+        path: '/dokter',
+        icon: <ProfileCircle />,
       },
     ],
     []
