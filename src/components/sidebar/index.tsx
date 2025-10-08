@@ -39,12 +39,12 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
 
       {/* Sidebar */}
       <Card
-        className={`max-w-[280px] h-[calc(100vh-70px)]  rounded-none absolute lg:sticky top-[70px] left-0 shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 z-50 ${
+        className={`w-[300px] h-[calc(100vh-70px)] overflow-x-hidden  rounded-none absolute lg:sticky top-[70px] left-0 shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 z-50 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <Card.Body className="p-3 flex flex-col h-full">
-          <List className="flex-1 overflow-y-auto">
+          <List className="flex-1 overflow-y-auto overflow-x-hidden">
             {menuItems.map(item => (
               <List.Item
                 selected={isActive(item.value)}

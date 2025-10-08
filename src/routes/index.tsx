@@ -7,6 +7,7 @@ import Header from '@/components/wrapper/header';
 import PembagianOtomatis from '@/pages/pembagian-otomatis';
 import DokterPage from '@/pages/dokter';
 import StaffPage from '@/pages/staff';
+import DantelPage from '@/pages/dantel';
 
 const routes = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const routes = createBrowserRouter([
           {
             path: '/staff',
             element: <StaffPage />,
+          },
+          {
+            path: '/kelola-dantel',
+            element: <DantelPage />,
           },
         ],
       },

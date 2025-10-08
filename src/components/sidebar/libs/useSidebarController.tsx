@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { ProfileCircle, StatsUpSquare, User, Wallet } from 'iconoir-react';
+import { Hospital, ProfileCircle, StatsUpSquare, User, Wallet } from 'iconoir-react';
 import { EMenu } from '@/utils/enums';
 
 const useSidebarController = () => {
@@ -13,7 +13,8 @@ const useSidebarController = () => {
     const isMasterDataActive =
       pathname.includes(EMenu.STAFF) ||
       pathname.includes(EMenu.PEMBAGIAN_OTOMATIS) ||
-      pathname.includes(EMenu.KELOLA_DOKTER);
+      pathname.includes(EMenu.KELOLA_DOKTER) ||
+      pathname.includes(EMenu.KELOLA_DANTEL);
 
     if (isMasterDataActive) {
       setIsOpenCollapse(true);
@@ -63,6 +64,12 @@ const useSidebarController = () => {
         path: '/kelola-dokter',
         icon: <ProfileCircle />,
       },
+      {
+        label: 'Kelola Dantel',
+        value: EMenu.KELOLA_DANTEL,
+        path: '/kelola-dantel',
+        icon: <Hospital />,
+      },
     ],
     [isOpenCollapse]
   );
@@ -72,7 +79,8 @@ const useSidebarController = () => {
       !isOpenCollapse &&
       (pathname.includes(EMenu.STAFF) ||
         pathname.includes(EMenu.PEMBAGIAN_OTOMATIS) ||
-        pathname.includes(EMenu.KELOLA_DOKTER))
+        pathname.includes(EMenu.KELOLA_DOKTER) ||
+        pathname.includes(EMenu.KELOLA_DANTEL))
     );
   }, [pathname, isOpenCollapse]);
 
