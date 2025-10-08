@@ -6,6 +6,7 @@ import Login from '@/pages/login';
 import Header from '@/components/wrapper/header';
 import PembagianOtomatis from '@/pages/pembagian-otomatis';
 import DokterPage from '@/pages/dokter';
+import StaffPage from '@/pages/staff';
 
 const routes = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const routes = createBrowserRouter([
           {
             path: '/kelola-dokter',
             element: <DokterPage />,
+          },
+          {
+            path: '/staff',
+            element: <StaffPage />,
           },
         ],
       },

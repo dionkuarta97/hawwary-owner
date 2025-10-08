@@ -44,7 +44,11 @@ const FormModal = (props: IFormModalProps) => {
       <DefaultModal
         title={detail ? 'Edit Dokter' : 'Tambah Dokter'}
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={() => {
+          onClose();
+          setIsOpen(false);
+          clearForm();
+        }}
         onAccept={() => {
           setIsOpenConfirmation(true);
         }}

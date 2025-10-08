@@ -12,6 +12,7 @@ import type {
 } from '@/interface/pembagian-otomatis/request';
 import { toast } from '@/components/default-toast';
 import { queryClient } from '@/App';
+import { messageError } from '@/utils/helpers';
 
 export const useQueryPembagianOtomatis = (params: IPembagianOtomatisRequestParams) => {
   const { data, isLoading, error } = useQuery({
@@ -30,9 +31,7 @@ export const useCreatePembagianOtomatis = () => {
       queryClient.invalidateQueries({ queryKey: [queryKey.PEMBAGIAN_OTOMATIS] });
     },
     onError: error => {
-      const message = Array.isArray(error.message)
-        ? error.message.join(', ')
-        : error.message || 'Terjadi kesalahan saat menambahkan pembagian otomatis';
+      const message = messageError(error, 'Terjadi kesalahan saat menambahkan pembagian otomatis');
       toast.error('Gagal!', message);
     },
   });
@@ -48,9 +47,7 @@ export const useDeletePembagianOtomatis = () => {
       queryClient.invalidateQueries({ queryKey: [queryKey.PEMBAGIAN_OTOMATIS] });
     },
     onError: error => {
-      const message = Array.isArray(error.message)
-        ? error.message.join(', ')
-        : error.message || 'Terjadi kesalahan saat menghapus pembagian otomatis';
+      const message = messageError(error, 'Terjadi kesalahan saat menghapus pembagian otomatis');
       toast.error('Gagal!', message);
     },
   });
@@ -67,9 +64,7 @@ export const useUpdatePembagianOtomatis = () => {
       queryClient.invalidateQueries({ queryKey: [queryKey.PEMBAGIAN_OTOMATIS] });
     },
     onError: error => {
-      const message = Array.isArray(error.message)
-        ? error.message.join(', ')
-        : error.message || 'Terjadi kesalahan saat mengubah pembagian otomatis';
+      const message = messageError(error, 'Terjadi kesalahan saat mengubah pembagian otomatis');
       toast.error('Gagal!', message);
     },
   });

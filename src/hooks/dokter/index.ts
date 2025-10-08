@@ -4,6 +4,7 @@ import queryKey from '../queryKey';
 import type { ICreateDokterRequest, IDokterRequestParams } from '@/interface/dokter/request';
 import { toast } from '@/components/default-toast';
 import { queryClient } from '@/App';
+import { messageError } from '@/utils/helpers';
 
 export const useQueryDokter = (params: IDokterRequestParams) => {
   const { data, isLoading, error } = useQuery({
@@ -21,9 +22,7 @@ export const useCreateDokter = () => {
       queryClient.invalidateQueries({ queryKey: [queryKey.DOKTER] });
     },
     onError: error => {
-      const message = Array.isArray(error.message)
-        ? error.message.join(', ')
-        : error.message || 'Terjadi kesalahan saat menambahkan dokter';
+      const message = messageError(error, 'Terjadi kesalahan saat menambahkan dokter');
       toast.error('Gagal!', message);
     },
   });
@@ -39,9 +38,7 @@ export const useDeleteDokter = () => {
       queryClient.invalidateQueries({ queryKey: [queryKey.DOKTER] });
     },
     onError: error => {
-      const message = Array.isArray(error.message)
-        ? error.message.join(', ')
-        : error.message || 'Terjadi kesalahan saat menghapus dokter';
+      const message = messageError(error, 'Terjadi kesalahan saat menghapus dokter');
       toast.error('Gagal!', message);
     },
   });
@@ -58,9 +55,7 @@ export const useUpdateDokter = () => {
       queryClient.invalidateQueries({ queryKey: [queryKey.DOKTER] });
     },
     onError: error => {
-      const message = Array.isArray(error.message)
-        ? error.message.join(', ')
-        : error.message || 'Terjadi kesalahan saat mengubah dokter';
+      const message = messageError(error, 'Terjadi kesalahan saat mengubah dokter');
       toast.error('Gagal!', message);
     },
   });

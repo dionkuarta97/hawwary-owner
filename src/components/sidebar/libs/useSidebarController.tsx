@@ -1,11 +1,29 @@
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { ProfileCircle, StatsUpSquare, Wallet } from 'iconoir-react';
+import { ProfileCircle, StatsUpSquare, User, Wallet } from 'iconoir-react';
 import { EMenu } from '@/utils/enums';
 
 const useSidebarController = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [isOpenCollapse, setIsOpenCollapse] = useState(false);
+
+  // Auto open collapse when one of the master data menus is active
+  useEffect(() => {
+    const isMasterDataActive =
+      pathname.includes(EMenu.STAFF) ||
+      pathname.includes(EMenu.PEMBAGIAN_OTOMATIS) ||
+      pathname.includes(EMenu.KELOLA_DOKTER);
+
+    if (isMasterDataActive) {
+      setIsOpenCollapse(true);
+    }
+  }, [pathname]);
+
+  // Function to toggle collapse - allow manual toggle
+  const toggleCollapse = () => {
+    setIsOpenCollapse(prev => !prev);
+  };
   const isActive = (path: (typeof EMenu)[keyof typeof EMenu]) => {
     if (pathname === '/') {
       return path === EMenu.DASHBOARD;
@@ -21,6 +39,18 @@ const useSidebarController = () => {
         path: '/',
         icon: <StatsUpSquare />,
       },
+    ],
+    []
+  );
+
+  const masterDataItems = useMemo(
+    () => [
+      {
+        label: 'Staff',
+        value: EMenu.STAFF,
+        path: '/staff',
+        icon: <User />,
+      },
       {
         label: 'Pembagian Otomatis',
         value: EMenu.PEMBAGIAN_OTOMATIS,
@@ -34,14 +64,28 @@ const useSidebarController = () => {
         icon: <ProfileCircle />,
       },
     ],
-    []
+    [isOpenCollapse]
   );
+
+  const isMasterDataActive = useMemo(() => {
+    return (
+      !isOpenCollapse &&
+      (pathname.includes(EMenu.STAFF) ||
+        pathname.includes(EMenu.PEMBAGIAN_OTOMATIS) ||
+        pathname.includes(EMenu.KELOLA_DOKTER))
+    );
+  }, [pathname, isOpenCollapse]);
 
   return {
     navigate,
     isActive,
     menuItems,
     pathname,
+    isOpenCollapse,
+    setIsOpenCollapse,
+    toggleCollapse,
+    masterDataItems,
+    isMasterDataActive,
   };
 };
 

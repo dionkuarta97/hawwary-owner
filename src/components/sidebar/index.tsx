@@ -1,14 +1,22 @@
-import { Card, List } from '@material-tailwind/react';
+import { Card, Collapse, List } from '@material-tailwind/react';
 import { useEffect } from 'react';
 import useSidebarController from './libs/useSidebarController';
-import { LogOut } from 'iconoir-react';
+import { Database, LogOut, NavArrowRight } from 'iconoir-react';
 
 interface ISidebarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
-  const { isActive, navigate, menuItems } = useSidebarController();
+  const {
+    isActive,
+    navigate,
+    menuItems,
+    toggleCollapse,
+    masterDataItems,
+    isOpenCollapse,
+    isMasterDataActive,
+  } = useSidebarController();
 
   // Prevent body scroll when sidebar is open on mobile
   useEffect(() => {
@@ -31,12 +39,12 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
 
       {/* Sidebar */}
       <Card
-        className={`max-w-[280px] h-[calc(100vh-70px)] rounded-none absolute lg:sticky top-[70px] left-0 shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 z-50 ${
+        className={`max-w-[280px] h-[calc(100vh-70px)]  rounded-none absolute lg:sticky top-[70px] left-0 shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 z-50 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <Card.Body className="p-3 flex flex-col h-full">
-          <List className="flex-1">
+          <List className="flex-1 overflow-y-auto">
             {menuItems.map(item => (
               <List.Item
                 selected={isActive(item.value)}
@@ -51,6 +59,40 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
                 {item.label}
               </List.Item>
             ))}
+            <hr className="my-4 border-gray-200 -mx-3" />
+            <List.Item
+              selected={isMasterDataActive}
+              onClick={toggleCollapse}
+              className="cursor-pointer"
+            >
+              <List.ItemStart>
+                <Database />
+              </List.ItemStart>
+              Master Data
+              <List.ItemEnd>
+                <NavArrowRight
+                  className={`h-4 w-4 transition-transform ${isOpenCollapse ? 'rotate-90' : ''}`}
+                />
+              </List.ItemEnd>
+            </List.Item>
+            <Collapse open={isOpenCollapse}>
+              <List className="ml-4">
+                {masterDataItems.map(item => (
+                  <List.Item
+                    selected={isActive(item.value)}
+                    key={item.value}
+                    onClick={() => {
+                      navigate(item.path);
+                      onClose();
+                    }}
+                    className="cursor-pointer"
+                  >
+                    <List.ItemStart>{item.icon}</List.ItemStart>
+                    {item.label}
+                  </List.Item>
+                ))}
+              </List>
+            </Collapse>
           </List>
           <List>
             <hr className="my-4 border-gray-200 -mx-3" />
