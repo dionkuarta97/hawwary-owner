@@ -9,7 +9,7 @@ import { useOpenCloseModal } from '@/hooks';
 
 const useDokterController = () => {
   const [params, setParams] = useState<IDokterRequestParams>({
-    per_page: 10,
+    limit: 10,
     page: 1,
     search: '',
   });

@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
-import { IconButton, Input, Select } from '@material-tailwind/react';
+import { IconButton, Input, Select, Menu } from '@material-tailwind/react';
 import { Button } from '@material-tailwind/react';
 import { NavArrowLeft, NavArrowRight, NavArrowDown, NavArrowUp, Search } from 'iconoir-react';
 import { useState, useEffect } from 'react';
@@ -27,6 +27,7 @@ interface IDefaultTableProps<T> {
   onSearchChange?: (newSearch: string) => void;
   isLoading?: boolean;
   defaultShowDataMobile?: number;
+  filter?: React.ReactNode;
 }
 const DefaultTable = <T,>({
   data,
@@ -41,6 +42,7 @@ const DefaultTable = <T,>({
   onSearchChange,
   isLoading = false,
   defaultShowDataMobile = 2,
+  filter,
 }: IDefaultTableProps<T>) => {
   const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
   const [isMobile, setIsMobile] = useState(false);
@@ -87,17 +89,28 @@ const DefaultTable = <T,>({
             </Select.List>
           </Select>
         </div>
-        <div className="flex w-full lg:w-fit">
-          <Input
-            className="w-full lg:w-[300px]"
-            placeholder="Search"
-            value={search || ''}
-            onChange={e => onSearchChange?.(e.target.value)}
-          >
-            <Input.Icon>
-              <Search className="h-full w-full" />
-            </Input.Icon>
-          </Input>
+
+        <div className="flex w-full lg:w-fit gap-2">
+          <div className="flex w-full lg:w-fit">
+            <Input
+              className="w-full lg:w-[300px]"
+              placeholder="Search"
+              value={search || ''}
+              onChange={e => onSearchChange?.(e.target.value)}
+            >
+              <Input.Icon>
+                <Search className="h-full w-full" />
+              </Input.Icon>
+            </Input>
+          </div>
+          {filter && (
+            <Menu placement="bottom-end">
+              <Menu.Trigger className="cursor-pointer" color="secondary" as={Button}>
+                Filter
+              </Menu.Trigger>
+              <Menu.Content className="w-[300px] p-[12px]">{filter}</Menu.Content>
+            </Menu>
+          )}
         </div>
       </div>
       {/* Desktop Table */}
@@ -131,7 +144,7 @@ const DefaultTable = <T,>({
                 Array.from({ length: per_page }, (_, index) => (
                   <TableRow key={index}>
                     <TableCell>
-                      <div className="h-4 bg-gray-200 rounded animate-pulse w-8"></div>
+                      <div className="h-4 bg-gray-200 rounded animate-pulse w-full"></div>
                     </TableCell>
                     {columns.map(column => (
                       <TableCell
@@ -146,7 +159,12 @@ const DefaultTable = <T,>({
                             : {}
                         }
                       >
-                        <div className="h-4 bg-gray-200 rounded animate-pulse w-24"></div>
+                        <div
+                          className={cn(
+                            'h-4 bg-gray-200 rounded animate-pulse',
+                            column.key === 'action' ? 'w-8' : 'w-24'
+                          )}
+                        ></div>
                       </TableCell>
                     ))}
                   </TableRow>
@@ -203,7 +221,7 @@ const DefaultTable = <T,>({
                     .map(column => (
                       <div key={String(column.key)} className="flex justify-between items-start">
                         <div className="h-4 bg-gray-200 rounded animate-pulse w-16"></div>
-                        <div className="h-4 bg-gray-200 rounded animate-pulse w-24"></div>
+                        <div className="h-4 bg-gray-200 rounded animate-pulse w-20"></div>
                       </div>
                     ))}
                 </div>
@@ -250,7 +268,7 @@ const DefaultTable = <T,>({
                         <span className="text-sm font-medium text-gray-600 min-w-[80px]">
                           {column.label}:
                         </span>
-                        <div className="text-sm text-gray-900 text-right flex-1 ml-2">
+                        <div className="text-sm overflow-hidden text-ellipsis whitespace-nowrap text-gray-900 text-right flex-1 ml-2">
                           {column.children ||
                             (column.render
                               ? column.render({ value: (item as any)[column.key], item, index })

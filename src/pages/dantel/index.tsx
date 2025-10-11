@@ -53,11 +53,11 @@ const DantelPage = () => {
         columns={columns}
         isLoading={isLoading}
         page={params.page ?? 1}
-        per_page={params.per_page ?? 10}
+        per_page={params.limit ?? 10}
         total_page={data?.metadata?.last_page ?? 1}
         defaultShowDataMobile={1}
         onPageChange={newPage => setParams({ ...params, page: newPage })}
-        onPerPageChange={newPerPage => setParams({ ...params, per_page: newPerPage })}
+        onPerPageChange={newPerPage => setParams({ ...params, limit: newPerPage, page: 1 })}
         search={params.search}
         onSearchChange={newSearch => setParams({ ...params, search: newSearch })}
       />

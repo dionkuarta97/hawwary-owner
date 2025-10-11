@@ -9,7 +9,7 @@ import { useOpenCloseModal } from '@/hooks';
 
 const useDantelController = () => {
   const [params, setParams] = useState<IDantelRequestParams>({
-    per_page: 10,
+    limit: 10,
     page: 1,
     search: '',
   });

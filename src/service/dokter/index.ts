@@ -6,7 +6,7 @@ import type { ISuccessPaginationResponse } from '@/interface/response/successWit
 
 export const getDokter = async (
   params: IDokterRequestParams
-): Promise<ISuccessPaginationResponse<IDokterResponse, {}>> => {
+): Promise<ISuccessPaginationResponse<IDokterResponse[], {}>> => {
   const response = await axiosInstance.get('/owner/docter/get', {
     params,
   });

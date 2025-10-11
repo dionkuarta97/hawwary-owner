@@ -9,7 +9,7 @@ import { useOpenCloseModal } from '@/hooks';
 
 const usePembagianOtomatisController = () => {
   const [params, setParams] = useState<IPembagianOtomatisRequestParams>({
-    per_page: 10,
+    limit: 10,
     page: 1,
     search: '',
   });

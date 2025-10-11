@@ -8,6 +8,10 @@ import PembagianOtomatis from '@/pages/pembagian-otomatis';
 import DokterPage from '@/pages/dokter';
 import StaffPage from '@/pages/staff';
 import DantelPage from '@/pages/dantel';
+import PasienPage from '@/pages/pasien';
+import TransaksiPage from '@/pages/transaksi';
+import FeeDistributions from '@/pages/fee-distributions';
+import OperasionalPage from '@/pages/operasional';
 
 const routes = createBrowserRouter([
   {
@@ -37,6 +41,22 @@ const routes = createBrowserRouter([
           {
             path: '/kelola-dantel',
             element: <DantelPage />,
+          },
+          {
+            path: '/pasien',
+            element: <PasienPage />,
+          },
+          {
+            path: '/transaksi',
+            element: <TransaksiPage />,
+          },
+          {
+            path: '/fee-distribution',
+            element: <FeeDistributions />,
+          },
+          {
+            path: '/operasional',
+            element: <OperasionalPage />,
           },
         ],
       },

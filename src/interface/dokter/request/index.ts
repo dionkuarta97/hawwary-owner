@@ -1,5 +1,5 @@
 export interface IDokterRequestParams {
-  per_page?: number;
+  limit?: number;
   page?: number;
   search?: string;
 }

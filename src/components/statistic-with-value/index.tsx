@@ -12,7 +12,7 @@ const StatisticWithValue = (props: IStatisticWithValueProps) => {
   return (
     <div
       className={cn(
-        'flex flex-col gap-2 border border-gray-200 rounded-[20px] lg:w-[30%] w-full p-4 bg-white',
+        'flex flex-col gap-2 border justify-between border-gray-200 rounded-[10px] lg:w-[30%] w-full p-4 bg-white',
         className
       )}
     >

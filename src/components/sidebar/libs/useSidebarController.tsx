@@ -1,13 +1,21 @@
 import { useMemo, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { Hospital, ProfileCircle, StatsUpSquare, User, Wallet } from 'iconoir-react';
+import {
+  CardWallet,
+  Hospital,
+  ProfileCircle,
+  StatsUpSquare,
+  User,
+  Wallet,
+  SubmitDocument,
+} from 'iconoir-react';
 import { EMenu } from '@/utils/enums';
 
 const useSidebarController = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isOpenCollapse, setIsOpenCollapse] = useState(false);
-
+  const [isOpenCollapseLayanan, setIsOpenCollapseLayanan] = useState(false);
   // Auto open collapse when one of the master data menus is active
   useEffect(() => {
     const isMasterDataActive =
@@ -19,11 +27,23 @@ const useSidebarController = () => {
     if (isMasterDataActive) {
       setIsOpenCollapse(true);
     }
+    const isLayananActive =
+      pathname.includes(EMenu.PASIEN) ||
+      pathname.includes(EMenu.TRANSAKSI) ||
+      pathname.includes(EMenu.FEE_DISTRIBUTION) ||
+      pathname.includes(EMenu.OPERASIONAL);
+
+    if (isLayananActive) {
+      setIsOpenCollapseLayanan(true);
+    }
   }, [pathname]);
 
   // Function to toggle collapse - allow manual toggle
   const toggleCollapse = () => {
     setIsOpenCollapse(prev => !prev);
+  };
+  const toggleCollapseLayanan = () => {
+    setIsOpenCollapseLayanan(prev => !prev);
   };
   const isActive = (path: (typeof EMenu)[keyof typeof EMenu]) => {
     if (pathname === '/') {
@@ -74,6 +94,36 @@ const useSidebarController = () => {
     [isOpenCollapse]
   );
 
+  const LayananItems = useMemo(
+    () => [
+      {
+        label: 'Data Pasien',
+        value: EMenu.PASIEN,
+        path: '/pasien',
+        icon: <User />,
+      },
+      {
+        label: 'Transaksi',
+        value: EMenu.TRANSAKSI,
+        path: '/transaksi',
+        icon: <Wallet />,
+      },
+      {
+        label: 'Fee Distribution',
+        value: EMenu.FEE_DISTRIBUTION,
+        path: '/fee-distribution',
+        icon: <CardWallet />,
+      },
+      {
+        label: 'Operasional',
+        value: EMenu.OPERASIONAL,
+        path: '/operasional',
+        icon: <SubmitDocument />,
+      },
+    ],
+    [isOpenCollapseLayanan]
+  );
+
   const isMasterDataActive = useMemo(() => {
     return (
       !isOpenCollapse &&
@@ -83,6 +133,15 @@ const useSidebarController = () => {
         pathname.includes(EMenu.KELOLA_DANTEL))
     );
   }, [pathname, isOpenCollapse]);
+  const isLayananActive = useMemo(() => {
+    return (
+      !isOpenCollapseLayanan &&
+      (pathname.includes(EMenu.PASIEN) ||
+        pathname.includes(EMenu.TRANSAKSI) ||
+        pathname.includes(EMenu.FEE_DISTRIBUTION) ||
+        pathname.includes(EMenu.OPERASIONAL))
+    );
+  }, [pathname, isOpenCollapseLayanan]);
 
   return {
     navigate,
@@ -94,6 +153,11 @@ const useSidebarController = () => {
     toggleCollapse,
     masterDataItems,
     isMasterDataActive,
+    isOpenCollapseLayanan,
+    setIsOpenCollapseLayanan,
+    toggleCollapseLayanan,
+    LayananItems,
+    isLayananActive,
   };
 };
 

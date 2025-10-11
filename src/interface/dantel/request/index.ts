@@ -1,5 +1,5 @@
 export interface IDantelRequestParams {
-  per_page?: number;
+  limit?: number;
   page?: number;
   search?: string;
 }

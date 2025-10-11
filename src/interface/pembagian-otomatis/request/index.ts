@@ -1,5 +1,5 @@
 export interface IPembagianOtomatisRequestParams {
-  per_page?: number;
+  limit?: number;
   page?: number;
   search?: string;
 }

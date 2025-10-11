@@ -1,7 +1,7 @@
 import { Card, Collapse, List } from '@material-tailwind/react';
 import { useEffect } from 'react';
 import useSidebarController from './libs/useSidebarController';
-import { Database, LogOut, NavArrowRight } from 'iconoir-react';
+import { Bank, Database, LogOut, NavArrowRight } from 'iconoir-react';
 
 interface ISidebarProps {
   isOpen: boolean;
@@ -16,6 +16,10 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
     masterDataItems,
     isOpenCollapse,
     isMasterDataActive,
+    isLayananActive,
+    LayananItems,
+    toggleCollapseLayanan,
+    isOpenCollapseLayanan,
   } = useSidebarController();
 
   // Prevent body scroll when sidebar is open on mobile
@@ -39,7 +43,7 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
 
       {/* Sidebar */}
       <Card
-        className={`w-[300px] h-[calc(100vh-70px)] overflow-x-hidden  rounded-none absolute lg:sticky top-[70px] left-0 shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 z-50 ${
+        className={`w-[300px] h-[calc(100vh-70px)] overflow-x-hidden rounded-none fixed lg:sticky top-[70px] left-0 shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 z-50 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -53,17 +57,17 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
                   navigate(item.path);
                   onClose(); // Tutup sidebar setelah navigasi di mobile
                 }}
-                className={`cursor-pointer `}
+                className={`cursor-pointer items-center`}
               >
                 <List.ItemStart>{item.icon}</List.ItemStart>
                 {item.label}
               </List.Item>
             ))}
-            <hr className="my-4 border-gray-200 -mx-3" />
+            <hr className="my-2 border-gray-200 -mx-3" />
             <List.Item
               selected={isMasterDataActive}
               onClick={toggleCollapse}
-              className="cursor-pointer"
+              className="cursor-pointer items-center"
             >
               <List.ItemStart>
                 <Database />
@@ -76,7 +80,7 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
               </List.ItemEnd>
             </List.Item>
             <Collapse open={isOpenCollapse}>
-              <List className="ml-4">
+              <List>
                 {masterDataItems.map(item => (
                   <List.Item
                     selected={isActive(item.value)}
@@ -85,7 +89,43 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
                       navigate(item.path);
                       onClose();
                     }}
-                    className="cursor-pointer"
+                    className="cursor-pointer items-center"
+                  >
+                    <List.ItemStart>{item.icon}</List.ItemStart>
+                    {item.label}
+                  </List.Item>
+                ))}
+              </List>
+            </Collapse>
+            <hr className="my-2 border-gray-200 -mx-3" />
+            <List.Item
+              selected={isLayananActive}
+              onClick={toggleCollapseLayanan}
+              className="cursor-pointer items-center"
+            >
+              <List.ItemStart>
+                <Bank />
+              </List.ItemStart>
+              Layanan & Transaksi
+              <List.ItemEnd>
+                <NavArrowRight
+                  className={`h-4 w-4 transition-transform ${
+                    isOpenCollapseLayanan ? 'rotate-90' : ''
+                  }`}
+                />
+              </List.ItemEnd>
+            </List.Item>
+            <Collapse open={isOpenCollapseLayanan}>
+              <List>
+                {LayananItems.map(item => (
+                  <List.Item
+                    selected={isActive(item.value)}
+                    key={item.value}
+                    onClick={() => {
+                      navigate(item.path);
+                      onClose();
+                    }}
+                    className="cursor-pointer items-center"
                   >
                     <List.ItemStart>{item.icon}</List.ItemStart>
                     {item.label}
@@ -95,9 +135,9 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
             </Collapse>
           </List>
           <List>
-            <hr className="my-4 border-gray-200 -mx-3" />
+            <hr className="my-2 border-gray-200 -mx-3" />
             <List.Item
-              className="cursor-pointer"
+              className="cursor-pointer items-center"
               onClick={() => {
                 navigate('/login');
                 onClose();

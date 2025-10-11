@@ -11,7 +11,7 @@ export const getPembagianOtomatis = async (
   params: IPembagianOtomatisRequestParams
 ): Promise<
   ISuccessPaginationResponse<
-    IPembagianOtomatisResponse,
+    IPembagianOtomatisResponse[],
     {
       total_percentage: number;
     }

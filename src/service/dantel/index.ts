@@ -6,7 +6,7 @@ import type { ISuccessPaginationResponse } from '@/interface/response/successWit
 
 export const getDantel = async (
   params: IDantelRequestParams
-): Promise<ISuccessPaginationResponse<IDantelResponse, {}>> => {
+): Promise<ISuccessPaginationResponse<IDantelResponse[], {}>> => {
   const response = await axiosInstance.get('/owner/dantel/get', {
     params,
   });
