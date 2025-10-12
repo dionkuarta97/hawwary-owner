@@ -44,7 +44,7 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
 
       {/* Sidebar */}
       <Card
-        className={`w-[300px] h-[calc(100vh-70px)] overflow-x-hidden rounded-none fixed lg:sticky top-[70px] left-0 shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 z-50 ${
+        className={`w-[300px] min-w-[300px] max-w-[300px] h-[calc(100vh-70px)] overflow-x-hidden rounded-none fixed lg:sticky top-[70px] left-0 shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 z-50 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

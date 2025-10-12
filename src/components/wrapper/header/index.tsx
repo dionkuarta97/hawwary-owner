@@ -24,9 +24,9 @@ const Header = () => {
           </div>
         </Container>
       </div>
-      <div className="w-full flex flex-col lg:flex-row">
+      <div className="w-full flex flex-col lg:flex-row min-h-0">
         <Sidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
-        <div className="w-full flex-1">
+        <div className="w-full flex-1 min-w-0 overflow-hidden">
           <Outlet />
         </div>
       </div>

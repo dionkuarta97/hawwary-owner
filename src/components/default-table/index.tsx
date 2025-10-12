@@ -65,7 +65,7 @@ const DefaultTable = <T,>({
   return (
     <div
       className={cn(
-        'min-h-full flex p-4 flex-col gap-4 justify-between bg-white rounded-md',
+        'min-h-[calc(100vh-110px)] flex p-4 flex-col gap-4 justify-between bg-white rounded-md overflow-hidden',
         className
       )}
     >
@@ -114,8 +114,8 @@ const DefaultTable = <T,>({
         </div>
       </div>
       {/* Desktop Table */}
-      <div className="hidden h-full lg:block">
-        <Table hoverable>
+      <div className="hidden h-full overflow-x-auto lg:block flex-1 min-w-0">
+        <Table hoverable className="min-w-max w-full">
           <TableHead>
             <TableRow>
               <TableHeadCell className="bg-gray-200 w-1.5">No</TableHeadCell>
@@ -183,7 +183,7 @@ const DefaultTable = <T,>({
                                 minWidth: `${column.width}px`,
                                 maxWidth: `${column.width}px`,
                               }
-                            : { maxWidth: '150px' }
+                            : { minWidth: '150px' }
                         }
                       >
                         {column.children ||

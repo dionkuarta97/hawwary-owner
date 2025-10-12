@@ -31,6 +31,9 @@ const useTransaksiController = () => {
         render: ({ item }) => {
           return <span>{item.pasien.nama}</span>;
         },
+        width: 200,
+        minWidth: 200,
+        maxWidth: 200,
       },
       {
         key: 'dokter',
@@ -38,6 +41,9 @@ const useTransaksiController = () => {
         render: ({ item }) => {
           return <span>{item.docter.name}</span>;
         },
+        width: 200,
+        minWidth: 200,
+        maxWidth: 200,
       },
       {
         key: 'status',

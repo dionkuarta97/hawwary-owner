@@ -26,21 +26,24 @@ const usePasienController = () => {
       {
         key: 'nama',
         label: 'Nama',
+        maxWidth: 200,
+        minWidth: 200,
+        width: 200,
       },
       {
         key: 'no_rm',
         label: 'No RM',
-        width: 150,
-        minWidth: 150,
-        maxWidth: 150,
+        width: 100,
+        minWidth: 100,
+        maxWidth: 100,
       },
 
       {
         key: 'total_transaksi',
         label: 'Order',
-        width: 150,
-        minWidth: 150,
-        maxWidth: 150,
+        width: 80,
+        minWidth: 80,
+        maxWidth: 80,
         render: ({ value }) => {
           return <span>{value || 0}</span>;
         },
@@ -66,9 +69,9 @@ const usePasienController = () => {
       {
         key: 'action',
         label: 'Aksi',
-        width: 150,
-        minWidth: 150,
-        maxWidth: 150,
+        width: 105,
+        minWidth: 105,
+        maxWidth: 105,
         action: ({ item }) => {
           return (
             <div className="flex gap-2">
