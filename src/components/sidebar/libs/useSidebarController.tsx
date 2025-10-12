@@ -123,7 +123,11 @@ const useSidebarController = () => {
     ],
     [isOpenCollapseLayanan]
   );
-
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.reload();
+  };
   const isMasterDataActive = useMemo(() => {
     return (
       !isOpenCollapse &&
@@ -158,6 +162,7 @@ const useSidebarController = () => {
     toggleCollapseLayanan,
     LayananItems,
     isLayananActive,
+    logout,
   };
 };
 

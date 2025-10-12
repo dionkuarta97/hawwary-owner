@@ -20,6 +20,7 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
     LayananItems,
     toggleCollapseLayanan,
     isOpenCollapseLayanan,
+    logout,
   } = useSidebarController();
 
   // Prevent body scroll when sidebar is open on mobile
@@ -139,7 +140,7 @@ const Sidebar = ({ isOpen, onClose }: ISidebarProps) => {
             <List.Item
               className="cursor-pointer items-center"
               onClick={() => {
-                navigate('/login');
+                logout();
                 onClose();
               }}
             >

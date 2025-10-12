@@ -1,10 +1,8 @@
-
 import { toast } from '@/components/default-toast';
 import type { IErrorResponse } from '@/interface/response/error';
 import authStore from '@/store/auth';
 import axios, { AxiosError } from 'axios';
 import { getDefaultStore } from 'jotai';
-
 
 const baseUrl = {
   prod: 'https://api.hawwarydentalcare.com/api',
@@ -12,7 +10,7 @@ const baseUrl = {
 };
 // http://127.0.0.1:8000/api
 const axiosInstance = axios.create({
-  baseURL: baseUrl.dev,
+  baseURL: baseUrl.prod,
 });
 
 // Get Jotai store instance
@@ -27,14 +25,13 @@ axiosInstance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
+
     return config;
   },
   error => {
     return Promise.reject(error);
   }
 );
-
 
 axiosInstance.interceptors.response.use(
   response => {
@@ -61,15 +58,16 @@ axiosInstance.interceptors.response.use(
           // Clear token dan user dari store
           store.set(authStore.token, null);
           store.set(authStore.user, null);
-          
+
           // Clear localStorage
           localStorage.removeItem('token');
           localStorage.removeItem('user');
-          
-      
-          const message = Array.isArray(error.response.data.message) ? error.response.data.message.join(', ') : error.response.data.message || 'Session expired';
-         toast.error('Gagal!', message);
-       
+
+          window.location.reload();
+          const message = Array.isArray(error.response.data.message)
+            ? error.response.data.message.join(', ')
+            : error.response.data.message || 'Session expired';
+          toast.error('Gagal!', message);
         }
       } else if (error.request) {
         // Request dibuat tapi tidak ada response

@@ -72,7 +72,16 @@ const useOperasionalController = () => {
         key: 'created_at',
         label: 'Tanggal',
         render: ({ item }) => {
-          return <span>{formatDate(item.created_at, 'dd MMM yyyy, HH:mm')}</span>;
+          return (
+            <span>
+              {formatDate(
+                item.transaksi_id
+                  ? item.transaksi?.created_at || new Date()
+                  : item.created_at || new Date(),
+                'dd MMM yyyy, HH:mm'
+              )}
+            </span>
+          );
         },
       },
       {

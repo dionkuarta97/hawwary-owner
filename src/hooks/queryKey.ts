@@ -7,6 +7,7 @@ const queryKey = {
   TRANSAKSI: 'transaksi',
   FEE_DISTRIBUTION: 'fee-distribution',
   OPERASIONAL: 'operasional',
+  DASHBOARD: 'dashboard',
 };
 
 export default queryKey;
