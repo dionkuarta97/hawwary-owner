@@ -21,7 +21,7 @@ const getFeeDistributions = async (
           total_amount: number;
           total_count: number;
         };
-        dantel: {
+        dental: {
           name: string;
           total_amount: number;
           total_count: number;

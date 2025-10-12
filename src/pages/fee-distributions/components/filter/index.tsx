@@ -163,12 +163,12 @@ const Filter = ({ onReset, onApply, filter }: IFilterProps) => {
           }}
         />
       )}
-      {additionalFee === 'dantel' && (
+      {additionalFee === 'dental' && (
         <DefaultSelect
-          key={`dantel-${dantel}`}
-          placeholder="Pilih Dantel"
+          key={`dental-${dantel}`}
+          placeholder="Pilih Dental"
           value={dantel || ''}
-          label="Dantel"
+          label="Dental"
           options={dantelOptions ?? []}
           onSelect={value => {
             setDantel(value);
@@ -202,7 +202,7 @@ const Filter = ({ onReset, onApply, filter }: IFilterProps) => {
                 onApply({
                   additionalFee: additionalFee || '',
                   dokter: additionalFee === 'dokter' ? dokter : null,
-                  dantel: additionalFee === 'dantel' ? dantel : null,
+                  dantel: additionalFee === 'dental' ? dantel : null,
                   start_date: tanggalAwal,
                   end_date: tanggalAkhir,
                 })

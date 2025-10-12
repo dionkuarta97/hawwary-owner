@@ -17,7 +17,7 @@ export interface IStatisticsProps {
         total_amount: number;
         total_count: number;
       };
-      dantel: {
+      dental: {
         name: string;
         total_amount: number;
         total_count: number;
@@ -56,7 +56,7 @@ const Statistics = ({ data }: IStatisticsProps) => {
           <StatisticWithValue
             className="w-full  lg:w-auto"
             title="Dantel"
-            value={`Rp ${Number(data?.by_additional_fee?.dantel?.total_amount || 0).toLocaleString(
+            value={`Rp ${Number(data?.by_additional_fee?.dental?.total_amount || 0).toLocaleString(
               'id-ID'
             )}`}
           />
@@ -109,7 +109,7 @@ const Statistics = ({ data }: IStatisticsProps) => {
               className="w-full "
               title="Dantel"
               value={`Rp ${Number(
-                data?.by_additional_fee?.dantel?.total_amount || 0
+                data?.by_additional_fee?.dental?.total_amount || 0
               ).toLocaleString('id-ID')}`}
             />
           </div>
